@@ -1,50 +1,52 @@
-create table if not exists Исполнители (
+create table if not exists РСЃРїРѕР»РЅРёС‚РµР»Рё (
 id serial primary key,
-Псевдоним varchar(40) not null unique,
-Альбом varchar(40) not null
+РџСЃРµРІРґРѕРЅРёРј varchar(40) not null unique,
+РђР»СЊР±РѕРј varchar(40) not null
 );
 
-create table if not exists Альбом (
+create table if not exists РђР»СЊР±РѕРј (
 id serial primary key,
-Треки varchar (100) not null,
-Идентификатор_исполнителя integer references Исполнители (id),
-Год_выпуска integer not null,
-Название varchar (50) not null
+РўСЂРµРєРё varchar (100) not null,
+Р“РѕРґ_РІС‹РїСѓСЃРєР° integer not null,
+РќР°Р·РІР°РЅРёРµ varchar (50) not null
 );
 
-create table if not exists Трек (
+create table if not exists РўСЂРµРє (
 id serial primary key,
-Название varchar (50) not null,
-Длительность integer not null,
-Идентификатор_альбома integer references Альбом(id)
+РќР°Р·РІР°РЅРёРµ varchar (50) not null,
+Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ integer not null,
+РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ_Р°Р»СЊР±РѕРјР° integer references РђР»СЊР±РѕРј(id)
 );
 
-create table if not exists Жанры ( 
+create table if not exists Р–Р°РЅСЂС‹ ( 
 id serial primary key,
-Название_жанра varchar (40) not null,
-Идентификатор_исполнителя integer references Исполнители(id)
+РќР°Р·РІР°РЅРёРµ_Р¶Р°РЅСЂР° varchar (40) not null,
+РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ_РёСЃРїРѕР»РЅРёС‚РµР»СЏ integer references РСЃРїРѕР»РЅРёС‚РµР»Рё(id)
 )
 
-alter table Исполнители add column Идентификатор_жанра integer references Жанры(id);
+alter table РСЃРїРѕР»РЅРёС‚РµР»Рё add column РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ_Р¶Р°РЅСЂР° integer references Р–Р°РЅСЂС‹(id);
 
-create table if not exists Жанры_исполнителей ( 
+create table if not exists Р–Р°РЅСЂС‹_РёСЃРїРѕР»РЅРёС‚РµР»РµР№ ( 
 id serial primary key,
-Индетификатор_жанра integer references Жанры(id),
-Индетификатор_исполнителя integer unique references Исполнители(id)
+РРЅРґРµС‚РёС„РёРєР°С‚РѕСЂ_Р¶Р°РЅСЂР° integer references Р–Р°РЅСЂС‹(id),
+РРЅРґРµС‚РёС„РёРєР°С‚РѕСЂ_РёСЃРїРѕР»РЅРёС‚РµР»СЏ integer unique references РСЃРїРѕР»РЅРёС‚РµР»Рё(id)
 )
 
-create table if not exists Альбомы_исполнителей (
+create table if not exists РђР»СЊР±РѕРјС‹_РёСЃРїРѕР»РЅРёС‚РµР»РµР№ (
 id serial primary  key,
-Индетификатор_альбома integer references Альбом(id),
-Индетификатор_исполнителя integer references Исполнители(id)
+РРЅРґРµС‚РёС„РёРєР°С‚РѕСЂ_Р°Р»СЊР±РѕРјР° integer references РђР»СЊР±РѕРј(id),
+РРЅРґРµС‚РёС„РёРєР°С‚РѕСЂ_РёСЃРїРѕР»РЅРёС‚РµР»СЏ integer references РСЃРїРѕР»РЅРёС‚РµР»Рё(id)
 )
 
-create table if not exists Сборник (
+create table if not exists РЎР±РѕСЂРЅРёРє (
 id serial primary key,
-Название varchar (40) not null,
-Год_выпуска integer not null,
-Идентификатор_трека integer references Трек(id),
-Идентификатор_альбома integer references Альбом(id)
+РќР°Р·РІР°РЅРёРµ varchar (40) not null,
+Р“РѕРґ_РІС‹РїСѓСЃРєР° integer not null
 )
 
+create table if not exists РЎР±РѕСЂРЅРёРє_С‚СЂРµРєРѕРІ (
+id serial primary key,
+РРЅРґРµС‚РёС„РёРєР°С‚РѕСЂ_СЃР±РѕСЂРЅРёРєР° integer references РЎР±РѕСЂРЅРёРє(id),
+РРЅРґРµС‚РёС„РёРєР°С‚РѕСЂ_С‚СЂРµРєР° integer references РўСЂРµРє(id)
+)
 
