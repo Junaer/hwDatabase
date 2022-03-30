@@ -7,7 +7,6 @@ id serial primary key,
 create table if not exists Альбом (
 id serial primary key,
 Треки varchar (100) not null,
-Идентификатор_исполнителя integer references Исполнители (id),
 Год_выпуска integer not null,
 Название varchar (50) not null
 );
@@ -42,9 +41,16 @@ id serial primary  key,
 create table if not exists Сборник (
 id serial primary key,
 Название varchar (40) not null,
-Год_выпуска integer not null,
-Идентификатор_трека integer references Трек(id),
-Идентификатор_альбома integer references Альбом(id)
+Год_выпуска integer not null
 )
+
+create table if not exists Сборник_треков (
+id serial primary key,
+Индетификатор_сборника integer references Сборник(id),
+Индетификатор_трека integer references Трек(id)
+)
+
+
+
 
 
